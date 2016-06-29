@@ -64,6 +64,7 @@
 {{#meg-layout layoutName="layouts/simple"}}
 {{#if redirected}}
 {{/if}}
+
 <div id="landing" class="landing">
    <div class="row hero z-1">
       <div class="landing-centered-wrapper">
@@ -81,18 +82,25 @@
                {{#simple-modal enabled=true title="Add Region"}}
                <ul>
                   <li class="pad"><span>Region Name:</span>&nbsp;&nbsp;&nbsp;
-                     {{input valueBinding="print" label="print" placeholder="Enter region." type="text" style="text-align: center; color: red;"}}
+                     {{input valueBinding=print label="print" placeholder="Enter region." type="text" style="text-align: center; color: red;"}}
                   </li>
                   <li class="pad"><span>Flag Icon:</span>&nbsp;&nbsp;&nbsp;<a style="color: #0027FF;" href="">www.megam.io</a></li>
                   <li class="pad"><span>Custom Flavors:</span>&nbsp;&nbsp;&nbsp;✕/✓</li>
-                  <li class="pad">
+                  {{#each hostInfos as |h index|}}
+                  <li>Plan {{index}}</li>
+                  {{#region-infos model=h onConfirm=(action "addhost") enabled=true}}
+                   {{/region-infos}}
+                   {{outlet}}
+                {{/each}}
+                  <!--<li class="pad">
+
                      <table style="width:100%">
                         <tr>
                            <td><span>Flavors:</span></td>
                            <td></td>
                            <td>
                               <a href="#" data-toggle="tooltip" title="Add"  >
-                              <button type="button" class="btn btn-default" aria-label="Left Align">
+                              <button type="button" {{action 'validateAndAuthenticate'}} class="btn btn-default" aria-label="Left Align">
                               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                               </button>
                               </a>
@@ -104,7 +112,7 @@
                            <td></td>
                         </tr>
                         <tr>
-                           <td>2GB/1Core</td>
+                           <td>2GB/4Core</td>
                            <td>40GB</td>
                            <td>
                               <span>
@@ -144,24 +152,24 @@
                            </td>
                         </tr>
                      </table>
-                  </li>
+                  </li>-->
                   <li class="pad">
                      <span>Cost:</span>
                      <tr>
                         <span style="color: #639352;">Compute:</span>&nbsp;
-                        {{input valueBinding="compute" label="compute" placeholder="" type="text"}}
+                        {{input valueBinding=compute label="compute" placeholder="" type="text"}}
                         <span style="color: #639352;">/month/gb</span>
                      </tr>
                      <tr>
                         <span style="color: #639352;">Storage:</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{input valueBinding="storage" label="storage" placeholder="" type="text"}}
+                        {{input valueBinding=storageq label="storage" placeholder="" type="text"}}
                         <span style="color: #639352;">/month/gb</span>
                      </tr>
                   </li>
                   <li class="pad"><span>Storage Type:</span>
-                     <input type="radio" name="plan" value="male"> SSD
-                     <input type="radio" name="plan" value="female"> HDD
-                     <input type="radio" name="plan" value="other"> BOTH
+                     <input type="radio" name="plan" value="ssd"> SSD
+                     <input type="radio" name="plan" value="hdd"> HDD
+                     <input type="radio" name="plan" value="both"> BOTH
                   </li>
                   <li style="text-align: center;"><button class="button" {{action 'close'}}>Add</button></li>
                </ul>
