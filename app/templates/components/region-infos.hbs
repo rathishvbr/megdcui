@@ -1,0 +1,20 @@
+<tr>
+        <td>
+            {{input value=compute placeholder="Enter a compute" type="text"}}
+        </td>
+        <td>
+            {{input value=storage placeholder="Enter a storage" type="text"}}
+        </td>
+        <td>
+          <span>
+          <a href="#" data-toggle="tooltip" title="Delete">
+          <button type="button" class="btn btn-default" aria-label="Left Align">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+          </a>
+          </span>
+        </td>
+  </tr>
+      {{#if isButtonVisible}}
+        <button class="button" {{action 'validateAndAuthenticate'}}>Add</button>
+      {{/if}}
